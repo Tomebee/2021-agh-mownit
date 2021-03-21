@@ -2,6 +2,8 @@
 
 Repository of MOWNiT classes at AGH 2021. It includes all docker-related stuff to start with. Make sure **volume mapping is enabled** and **port 3000 is available**
 
+**Dont forget to install Xming**
+
 ## Get started
 - run build.ps1
 - run run.ps1
