@@ -1,0 +1,1 @@
+docker build -f .\ubuntu.dockerfile -t ubuntu:agh-mownit .
