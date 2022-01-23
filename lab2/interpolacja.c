@@ -16,7 +16,7 @@ int main (void)
   const double a = 1.0;
   const double b = 10.0;
   const int steps = 10;
-  double xi, yi, x[100], y[100], dx;
+  double xi, yi, yi2, x[100], y[100], dx;
   FILE *input, *output;
   int i;
 
@@ -35,17 +35,21 @@ int main (void)
     gsl_interp_accel *acc 
       = gsl_interp_accel_alloc ();
 
-    gsl_spline *spline 
+    gsl_spline *spline_polynomial 
       = gsl_spline_alloc (gsl_interp_polynomial, steps + 1);
+    gsl_spline *spline_csp = gsl_spline_alloc(gsl_interp_cspline, steps + 1);
 
-    gsl_spline_init (spline, x, y, steps + 1);
+    gsl_spline_init(spline_polynomial, x, y, steps + 1);
+    gsl_spline_init(spline_csp, x, y, steps + 1);
 
     for (xi = a; xi <= b; xi += 0.01) {
-        yi = gsl_spline_eval (spline, xi, acc);
-        fprintf (output,"%g %g\n", xi, yi);
+        yi = gsl_spline_eval(spline_polynomial, xi, acc);
+        yi2 = gsl_spline_eval(spline_csp, xi, acc);
+        fprintf (output,"%g %g %g\n", xi, yi, yi2);
 	}
 	
-    gsl_spline_free (spline);
+    gsl_spline_free(spline_polynomial);
+    gsl_spline_free(spline_csp);
     gsl_interp_accel_free(acc);
   }
   return 0;

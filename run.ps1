@@ -1,1 +1,1 @@
-docker run -it -p 3000:80 -e DISPLAY=host.docker.internal:0.0 -v ${PWD}:/ ubuntu:agh-mownit /bin/bash
+docker run -it -p 3000:80 -e DISPLAY=host.docker.internal:0.0 -v ${PWD}:/mownit ubuntu:agh-mownit /bin/bash
